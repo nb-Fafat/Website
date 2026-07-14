@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>版本日志</title>
+</head>
+<style>
+body {
+    margin: 0;
+    text-align: center;
+    background: #fafafa;
+}
+header {
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 10px 10px #f9f9f9;
+}
+header a {
+    margin: 15px;
+    text-decoration: none;
+    color: #53565e;
+}
+h1{
+    font-size: 48px;
+}
+h2{
+    font-size: 36px;
+}
+h3{
+    font-size: 24px;
+}
+</style>
+<body>
+    <header>
+        <a style="color: #165dfe; font-size: 24px;"><strong>Fafat 虚拟股票系统</strong></a>
+        <a></a>
+    	<a href=".">主页</a>
+    	<a href="my.html">我的股票</a>
+    	<a href="vers.html">版本日志</a>
+    	<a href="link.html">友情链接</a>
+    	<a href="more.html">更多</a>
+        <a></a>
+        <a id="time"></a>
+    </header>
+    <p></p>
+    <h1>版本日志</h1>
+    <!--
+    <h3>v0.0.1-beta.1</h3>
+    <p>添加购买股票功能</p>
+    -->
+    <h3>v0.0.1-alpha.2 <span style="font-weight: normal; font-size: 16px;">(2026/07/10)</span></h3>
+    <p>改用ECharts制作，随机算法改成Vial股票版</p>
+    <h3>v0.0.1-alpha.1 <span style="font-weight: normal; font-size: 16px;">(2026/07/10)</span></h3>
+    <p>加入了Orgent网站主题导航栏和按钮等</p>
+    <h3>v0.0.1-alpha <span style="font-weight: normal; font-size: 16px;">(2026/07/07)</span></h3>
+    <p>修改了一下<a href="//awm.uuk.pp.ua/gp/0.0.0" target="blank">AWM的股票</a>（用Chart制作），主要修改了随机算法</p>
+</body>
+<script>
+function updateTime(){
+    function add0(s){
+        return String(s).padStart(2, '0');
+    }
+    const date = new Date();
+    document.getElementById("time").innerText = `${date.getFullYear()}-${add0(date.getMonth() + 1)}-${add0(date.getDate())} ${add0(date.getHours())}:${add0(date.getMinutes())}:${add0(date.getSeconds())}`;
+}
+updateTime();setInterval(updateTime,1000);
+</script>
+</html>
