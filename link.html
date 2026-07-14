@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友情链接</title>
+</head>
+<style>
+body {
+    margin: 0;
+    text-align: center;
+    background: #fafafa;
+}
+header {
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 10px 10px #f9f9f9;
+}
+header a {
+    margin: 15px;
+    text-decoration: none;
+    color: #53565e;
+}
+h1{
+    font-size: 48px;
+    margin: 100px 0 0 0;
+}
+h2{
+    font-size: 36px;
+}
+h3{
+    font-size: 24px;
+    margin: 10px;
+}
+li{
+    margin: 5px;
+}
+.frame {
+    padding: 10px 30px 20px;
+    margin: 30px;
+    text-align: left;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #f9f9f9;
+}
+</style>
+<body>
+    <header>
+        <a style="color: #165dfe; font-size: 24px;"><strong>Fafat 虚拟股票系统</strong></a>
+        <a></a>
+    	<a href=".">主页</a>
+    	<a href="my.html">我的股票</a>
+    	<a href="vers.html">版本日志</a>
+    	<a href="link.html">友情链接</a>
+    	<a href="more.html">更多</a>
+        <a></a>
+        <a id="time"></a>
+    </header>
+    <p></p>
+    <h1>友情链接</h1>
+    <p><big>一些其它的网站</big></p>
+    <div class="frame">
+        <h3>NOBOOK官方</h3>
+        <li><a href="//www.nobook.com" target="_blank">NOBOOK官网</a></li>
+        <li><a href="//hx.nobook.com" target="_blank">NB化学实验</a></li>
+        <li><a href="//hx-app.nobook.com" target="_blank">NB化学实验APP 2.0</a></li>
+        <li><a href="//hx-app.noteach.com.cn" target="_blank">NB化学实验APP 3.0</a></li>
+        <li><a href="//wl.nobook.com" target="_blank">NB物理实验</a></li>
+        <li><a href="//wl-app.nobook.com" target="_blank">NB物理实验APP 2.0</a></li>
+        <li><a href="//wl-app.noteach.com.cn" target="_blank">NB物理实验APP 3.0</a></li>
+    </div>
+    <div class="frame">
+        <h3>各公司网站</h3>
+        <li><a href="//vial.uuk.pp.ua" target="_blank">Vial网站 <small>(存档)</small></a></li>
+        <li><a href="//nb-qx.top" target="_blank">齐喜的网站</a></li>
+        <li><a href="//fafat.uuk.pp.ua" target="_blank">Fafat的网站</a></li>
+        <li><a href="//awm.uuk.pp.ua" target="_blank">AWM官网 <small>(加速版)</small></a></li>
+        <li><a href="//nb-channel.top" target="_blank">NB频道官网</a></li>
+    </div>
+<script>
+function updateTime(){
+    function add0(s){
+        return String(s).padStart(2, '0');
+    }
+    const date = new Date();
+    document.getElementById("time").innerText = `${date.getFullYear()}-${add0(date.getMonth() + 1)}-${add0(date.getDate())} ${add0(date.getHours())}:${add0(date.getMinutes())}:${add0(date.getSeconds())}`;
+}
+updateTime();setInterval(updateTime,1000);
+</script>
+</html>
