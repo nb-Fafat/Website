@@ -1,3 +1,190 @@
-<title>Fafat的网站</title>
-<h1>Fafat的网站</h1>
-test
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fafat 虚拟股票系统</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <meta name="description" content="Fafat 虚拟股票系统，NB圈的股票系统">
+    <meta name="keywords" content="虚拟股票，虚拟投资，虚拟公司，虚拟股票系统，Vial股票，Ndc股票，Orgent股票，Fafat股票，Fafat股票系统，Fafat虚拟股票系统，NB股票，NB圈股票，NB虚拟股票，NB圈虚拟股票，NB圈公司，NB虚拟公司，NB圈虚拟公司，NB实验室公司，NB圈">
+</head>
+<style>
+body {
+    margin: 0;
+    text-align: center;
+    background: #fafafa;
+}
+header {
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 10px 10px #f9f9f9;
+}
+header a {
+    margin: 15px;
+    text-decoration: none;
+    color: #53565e;
+}
+h1{
+    font-size: 48px;
+    margin: 100px 0 0 0;
+}
+h2{
+    font-size: 36px;
+}
+h3{
+    font-size: 24px;
+}
+.stocks {
+    padding: 20px;
+    margin: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #f9f9f9;
+}
+.frame {
+    padding: 10px 30px 20px;
+    margin: 30px;
+    text-align: left;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #f9f9f9;
+}
+.btn1 {
+    border: solid 1px #0e4bd1;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #165dfe;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.btn2 {
+    border: solid 1px #0e4bd1;
+    padding: 10px 20px;
+    background-color: #165dfe;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+</style>
+<body>
+    <header>
+        <a style="color: #165dfe; font-size: 24px;"><strong>Fafat 虚拟股票系统</strong></a>
+        <a></a>
+    	<a href=".">主页</a>
+    	<a href="my.html">我的股票</a>
+    	<a href="vers.html">版本日志</a>
+    	<a href="link.html">友情链接</a>
+    	<a href="more.html">更多</a>
+        <a></a>
+        <a id="time"></a>
+    </header>
+    <p></p>
+    <h1>虚拟投资</h1>
+    <p style="color: #53565e; margin-bottom: 30px;"><big>剩余 <strong id="money" style="color: #ffd031;">0</strong> Fafat 币</big></p>
+    <button class="btn1" onclick="f1();">了解</button>
+    <span>&nbsp;&nbsp;</span>
+    <a href="support.html"><button class="btn2">支持虚拟公司</button></a>
+    <p></p>
+    <div class="stocks">
+        <div id="chart" style="width: 100%; height: 600px;"></div>
+    </div>
+    <!--
+    <div class="frame">
+        <h3>购买虚拟股票</h3>
+        <p>购买 <select id="company-select"></select> 公司 <input type="number" id="pay" value="10"></input> Fafat 币</p>
+        <button class="btn2" onclick="buy();">购买</button>
+    </div>
+    -->
+</body>
+<script>
+function updateTime(){
+    function add0(s){
+        return String(s).padStart(2, '0');
+    }
+    const date = new Date();
+    document.getElementById("time").innerText = `${date.getFullYear()}-${add0(date.getMonth() + 1)}-${add0(date.getDate())} ${add0(date.getHours())}:${add0(date.getMinutes())}:${add0(date.getSeconds())}`;
+}
+updateTime();setInterval(updateTime,1000);
+
+
+const INIT_DATA = {AWM: 250, Lemon: 300, GaoHanTu: 200, Utw: 800, Fafat: 250, COHL: 300, UWSF: 250, Vial: 250, SOTL: 350, Oganesson: 300};
+const COMPANIES = Object.keys(INIT_DATA);
+const INIT_VALUES = Object.values(INIT_DATA);
+
+if(localStorage.data == undefined){
+    localStorage.data = JSON.stringify(INIT_VALUES);
+}
+let data = JSON.parse(localStorage.data);
+const chart = echarts.init(document.getElementById('chart'));
+const option = {
+    title: {text: '当前所有虚拟公司市值'},
+    xAxis: {
+        type: 'category',
+        data: COMPANIES,
+        axisLabel: {interval: 0}
+    },
+    yAxis: {type: 'value'},
+    series: [{
+        name: '市值',
+        type: 'bar',
+        data: data,
+        itemStyle: {color: '#3198d9'}
+    }],
+    label: {show: true, position: 'top'}
+};
+chart.setOption(option);
+window.addEventListener('resize', () => chart.resize());
+
+    
+function randomChange() {
+    return Math.floor(Math.random() * 5);
+}
+setInterval(function(){
+    for(let i=0; i<data.length; i++){
+        if (data[i] === 1) {
+            data[i] += randomChange();
+        } else {
+            const change = randomChange();
+            data[i] = Math.max(1, data[i] + (Math.random() > 0.5 ? change : -change));
+        }
+    }
+    localStorage.data = JSON.stringify(data);
+    chart.setOption({series: [{name: '市值', data: data}]});
+},1000)
+
+
+/*
+const select = document.getElementById('company-select')
+for(let i=0; i<COMPANIES.length; i++){
+    let option = new Option(COMPANIES[i], i);
+	select.add(option); 
+}
+*/
+
+if(localStorage.money == undefined){
+    localStorage.money = 80;
+}
+let money = localStorage.money;
+document.getElementById('money').innerText = money;
+
+function buy(){
+    if(localStorage.myStocks == undefined){
+        localStorage.myStocks = JSON.stringify([]);
+    }
+    let myStocks = JSON.parse(localStorage.myStocks);
+    let company = COMPANIES[select.value];
+    let curr = data[select.value];
+    let pay = document.getElementById('pay').value;
+    money -= pay; localStorage.money = money;
+    document.getElementById('money').innerText = money;
+    myStocks.push({company: company, pay: pay, curr: curr});
+    localStorage.myStocks = JSON.stringify([myStocks]);
+    alert(`已成功购买 ${company} 共 ${pay} Fafat 币，当前市值为 ${curr}`);
+}
+
+
+function f1(){
+    alert("Fafat 虚拟股票系统，NB圈的一种“虚拟”股票\n\n现在NB圈已经买不了股票了，所以就有了这个系统\n\n和 Orgent 网站高度相似");
+}
+</script>
+</html>
